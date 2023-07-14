@@ -29,8 +29,10 @@ install_filemanager()
     trap 'echo -e "Aborted, error $? in command: $BASH_COMMAND"; trap ERR; return 1' ERR
     filemanager_os="unsupported"
     filemanager_arch="unknown"
-    install_path="/usr/local/bin"
- 
+    #install_path="/usr/local/bin" #Commented
+    install_path="/home/oexs7521/bin" #Added
+
+    : '
     # Termux on Android has $PREFIX set which already ends with /usr
     if [[ -n "$ANDROID_ROOT" && -n "$PREFIX" ]]; then
         install_path="$PREFIX/bin"
@@ -40,7 +42,8 @@ install_filemanager()
     if [[ ! -d $install_path ]]; then
         install_path="/usr/bin"
     fi
- 
+     '
+    
     # Not every platform has or needs sudo (https://termux.com/linux.html)
     #((EUID)) && [[ -z "$ANDROID_ROOT" ]] && sudo_cmd="sudo" #Commented
     sudo_cmd="" #Added
